@@ -68,11 +68,12 @@ def main():
 
     for E in E_zeros:
         Wave_function(E)
-        plt.plot(x,psi[:,0])
+        plt.plot(x,psi[:,0], label="E = %.2f"%E)
     plt.grid()
     plt.title("Wave function")
     plt.xlabel('x, $x/L$')
     plt.ylabel('$\Psi(x)$')
+    plt.legend()
     plt.show()
 
     
