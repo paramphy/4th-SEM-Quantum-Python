@@ -39,7 +39,7 @@ def find_all_zeros(x,y):
 N = 1000
 psi = np.zeros([N,2])
 psi0 = np.array([0,1])
-Vo = 2
+Vo = -20
 E = 0.0
 b = 2
 x = np.linspace(-b,b,N)
@@ -60,6 +60,9 @@ def main():
     for E in E_zeros:
         print("Energy = ", E)
     plt.plot(en/Vo,psi_b)
+    plt.scatter(np.array(E_zeros)/Vo,np.zeros_like(E_zeros))
+    plt.xlabel('Energy,$E/V_0$')
+    plt.ylabel('$\Psi(x=b)$')
     plt.grid()
     plt.show()
 
@@ -67,6 +70,9 @@ def main():
         Wave_function(E)
         plt.plot(x,psi[:,0])
     plt.grid()
+    plt.title("Wave function")
+    plt.xlabel('x, $x/L$')
+    plt.ylabel('$\Psi(x)$')
     plt.show()
 
     
