@@ -6,7 +6,7 @@ from scipy.optimize import brentq
 
 def V(x):
 
-    return(x**2)
+    return(1- np.exp(-(x-1)))**2
     
 def plotpotential(x):
     pot = []
@@ -41,9 +41,9 @@ def find_all_zeros(x,y):
 N = 1000
 psi = np.zeros([N,2])
 psi0 = np.array([0,1])
-Vo = -20
+Vo = 100
 E = 0.0
-b = 20
+b = 2
 x = np.linspace(-b,b,N)
 
 def main():
@@ -58,7 +58,7 @@ def main():
     E_zeros = find_all_zeros(en,psi_b)
 
     print("Energy of the bound states")
-    print(E_zeros, psi_b)
+    #print(E_zeros, psi_b)
     for E in E_zeros:
         print("Energy = ", E)
     plt.plot(en/Vo,psi_b)
@@ -70,8 +70,8 @@ def main():
 
     for E in E_zeros:
         Wave_function(E)
-        plt.plot(x,(psi[:,0]/np.max(psi[:,0]))+E, label="E = %.2f"%E)
-    plt.plot(x,plotpotential(x), label = "Potential")
+        plt.plot(x,(psi[:,0]/np.max(psi[:,0])), label="E = %.2f"%E)
+    #plt.plot(x,plotpotential(x), label = "Potential")
     plt.grid()
     plt.title("Wave function")
     plt.xlabel('x, $x/L$')

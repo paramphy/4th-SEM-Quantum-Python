@@ -6,11 +6,7 @@ from scipy.optimize import brentq
 
 def V(x):
 
-    L = 1
-    if abs(x)>L:
-        return 0
-    else:
-        return Vo
+    return(x**2)
     
 def plotpotential(x):
     pot = []
@@ -45,7 +41,7 @@ def find_all_zeros(x,y):
 N = 1000
 psi = np.zeros([N,2])
 psi0 = np.array([0,1])
-Vo = -20
+Vo = 10
 E = 0.0
 b = 2
 x = np.linspace(-b,b,N)
@@ -85,6 +81,6 @@ def main():
 
     
 
-#if __name__ =="__main__":
-main()
+if __name__ =="__main__":
+    main()
     
