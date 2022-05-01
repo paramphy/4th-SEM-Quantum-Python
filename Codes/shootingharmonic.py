@@ -6,11 +6,7 @@ from scipy.optimize import brentq
 
 def V(x):
 
-    L = 1
-    if abs(x)>L:
-        return 0
-    else:
-        return Vo
+    return(x**2)
     
 def plotpotential(x):
     pot = []
@@ -47,7 +43,7 @@ psi = np.zeros([N,2])
 psi0 = np.array([0,1])
 Vo = -20
 E = 0.0
-b = 2
+b = 20
 x = np.linspace(-b,b,N)
 
 def main():
