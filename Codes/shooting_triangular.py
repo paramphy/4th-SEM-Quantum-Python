@@ -45,7 +45,7 @@ def find_all_zeros(x, y):
 N = 1000
 psi = np.zeros([N, 2])
 psi0 = np.array([0, 1])
-Emax = 10
+Emax = 100
 E = 0.0
 b = 2
 x = np.linspace(-b, b, N)
