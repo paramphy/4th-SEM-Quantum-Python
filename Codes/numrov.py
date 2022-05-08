@@ -5,7 +5,7 @@ Solving second-order ordinary differential equations by the Numerov method
 import numpy as np
 import matplotlib.pyplot as plt
 
-delta_x = 0.005
+delta_x = 0.0001
 xL0, xR0 = 0, 1
 Nx = int((xR0 - xL0) / delta_x)
 
