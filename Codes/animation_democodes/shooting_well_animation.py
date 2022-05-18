@@ -61,10 +61,10 @@ def animate(i):
     lines = []
     # plots a sine graph
     # for E in E_zeros:
-    Wave_function(E_zeros[-2])
+    Wave_function(E_zeros[0])
     line.set_data(
         x,
-        E_zeros[-2] + (psi[:, 0] / np.max(psi[:, 0])) * np.cos(E_zeros[-2] * i * 0.001),
+        E_zeros[0] + (psi[:, 0] / np.max(psi[:, 0])) * np.cos(E_zeros[0] * i * 0.001),
     )
     # y = np.sin(2 * np.pi * (x - 0.01 * i))*np.exp(-i*0.003)
     # line.set_data(x, y)
@@ -126,7 +126,7 @@ main()
 fig = plt.figure()
 
 # marking the x-axis and y-axis
-axis = plt.axes(xlim=(-2, 2), ylim=(E_zeros[-2] - 1, E_zeros[-2] + 1))
+axis = plt.axes(xlim=(-2, 2), ylim=(E_zeros[0] - 1, E_zeros[0] + 1))
 
 # initializing a line variable
 (line,) = axis.plot([], [], lw=3)

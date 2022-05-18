@@ -16,8 +16,8 @@ def identity(x, n,m, N=1):
 
 
 x = np.linspace(-1, 1, 100)
-n = np.arange(100)
-m = np.arange(100)
+n = np.arange(50)
+m = np.arange(50)
 x =[]
 y = []
 z = []
@@ -32,5 +32,7 @@ for i in n:
         z.append(identity(x,i,j))
 
 ax.scatter(np.array(x), np.array(y), np.array(z), 'green')
-ax.set_title('3D line plot geeks for geeks')
+ax.set_title('Orthogonality relation')
+ax.set_xlabel("n")
+ax.set_ylabel("m")
 plt.show()
