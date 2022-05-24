@@ -31,7 +31,7 @@ def Numerov(f, x0, dx, dh):
 
 
 def fSchrod(En, R):
-    return 2*((-1 / R) - En)
+    return 2*((0.5*R**2+0.33*R**3) - En)
 
 
 def ComputeSchrod(En, R):
@@ -70,7 +70,7 @@ def FindBoundStates(R, nmax, Esearch):
     return Ebnd
 
 
-Esearch = -2 / np.arange(1, 20, 0.2) ** 2
+Esearch = -2 / np.arange(1, 200, 0.2) ** 2
 
 
 R = np.linspace(1e-8, 100, 2000)

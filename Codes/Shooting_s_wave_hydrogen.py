@@ -30,59 +30,65 @@ def Numerov(f, x0, dx, dh):
     return x
 
 
-def fSchrod(En, R):
-    return 2*((-1 / R) - En)
+def fSchrod(En, l, R):
+    return l * (l + 1.0) / R ** 2 - 2.0 / R - En
 
 
-def ComputeSchrod(En, R):
+def ComputeSchrod(En, R, l):
     "Computes Schrod Eq."
-    f = fSchrod(En, R[::-1])
+    f = fSchrod(En, l, R[::-1])
     ur = Numerov(f, 0.0, -1e-7, -R[1] + R[0])[::-1]
     norm = integrate.simps(ur ** 2, x=R)
     return ur * 1 / np.sqrt(abs(norm))
 
 
-def Shoot(En, R):
-    ur = ComputeSchrod(En, R)
+def Shoot(En, R, l):
+    ur = ComputeSchrod(En, R, l)
+    ur = ur / R ** l
     f0 = ur[0]
     f1 = ur[1]
     f_at_0 = f0 + (f1 - f0) * (0.0 - R[0]) / (R[1] - R[0])
     return f_at_0
 
 
-def FindBoundStates(R, nmax, Esearch):
+def FindBoundStates(R, l, nmax, Esearch):
     n = 0
     Ebnd = []
-    u0 = Shoot(Esearch[0], R)
+    u0 = Shoot(Esearch[0], R, l)
     for i in range(1, len(Esearch)):
-        u1 = Shoot(Esearch[i], R)
+        u1 = Shoot(Esearch[i], R, l)
         if u0 * u1 < 0:
             Ebound = optimize.brentq(
-                Shoot, Esearch[i - 1], Esearch[i], xtol=1e-16, args=(R)
+                Shoot, Esearch[i - 1], Esearch[i], xtol=1e-16, args=(R, l)
             )
-            Ebnd.append(Ebound)
+            Ebnd.append((l, Ebound))
             if len(Ebnd) > nmax:
                 break
             n += 1
-            print("Found bound state at E=%14.9f " % (Ebound))
+            print(
+                "Found bound state at E=%14.9f E_exact=%14.9f l=%d"
+                % (Ebound, -1.0 / (n + l) ** 2, l)
+            )
         u0 = u1
 
     return Ebnd
 
 
-Esearch = -2 / np.arange(1, 20, 0.2) ** 2
-
+Esearch = -1.2 / np.arange(1, 20, 0.2) ** 2
 
 R = np.linspace(1e-8, 100, 2000)
 
-nmax = 10
+nmax = 3
+Bnd = []
+for l in range(nmax - 1):
+    Bnd += FindBoundStates(R, l, nmax - l, Esearch)
 
-Bnd = FindBoundStates(R,nmax, Esearch)
 rho = np.zeros(len(R))
-for En in Bnd:
-    ur = ComputeSchrod(En, R)
-    
-    plt.plot(R, ur * ur, label="E = " + str(round(En, 4)))
+for (l, En) in Bnd:
+    # ur = SolveSchroedinger(En,l,R)
+    ur = ComputeSchrod(En, R, l)
+    plt.plot(R, ur * ur, label="E = " + str(round(En, 4)) + " l = " + str(l))
 
+plt.xlim([0, 25])
 plt.legend()
 plt.show()
