@@ -31,7 +31,7 @@ def Numerov(f, x0, dx, dh):
 
 
 def fSchrod(En, R):
-    return 2*((-1 / R) - En)
+    return 2 * ((-1 / R) - En)
 
 
 def ComputeSchrod(En, R):
@@ -77,11 +77,11 @@ R = np.linspace(1e-8, 100, 2000)
 
 nmax = 10
 
-Bnd = FindBoundStates(R,nmax, Esearch)
+Bnd = FindBoundStates(R, nmax, Esearch)
 rho = np.zeros(len(R))
 for En in Bnd:
     ur = ComputeSchrod(En, R)
-    
+
     plt.plot(R, ur * ur, label="E = " + str(round(En, 4)))
 
 plt.legend()

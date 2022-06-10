@@ -6,7 +6,7 @@ from matplotlib.animation import FuncAnimation
 print("2D heat equation solver")
 
 plate_length = 50
-max_iter_time = 750
+max_iter_time = 300
 
 alpha = 2
 delta_x = 1
@@ -22,9 +22,9 @@ u_initial = 0
 
 # Boundary conditions
 u_top = 100.0
-u_left = 100.0
-u_bottom = 0.0
-u_right = 0.0
+u_left = 10.0
+u_bottom = 20.0
+u_right = 30.0
 
 # Set the initial condition
 u.fill(u_initial)
@@ -34,7 +34,7 @@ u[:, (plate_length-1):, :] = u_top
 u[:, :, :1] = u_left
 u[:, :1, 1:] = u_bottom
 u[:, :, (plate_length-1):] = u_right
-
+print(u)
 def calculate(u):
     for k in range(0, max_iter_time-1, 1):
         for i in range(1, plate_length-1, delta_x):
